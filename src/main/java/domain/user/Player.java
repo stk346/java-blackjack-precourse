@@ -11,7 +11,7 @@ import java.util.List;
 public class Player {
     private final String name;
     private final double bettingMoney;
-
+    private double gameMoney;
     private boolean gameContinueFlag = true;
     private final List<Card> cards = new ArrayList<>();
 
@@ -58,8 +58,30 @@ public class Player {
         return aceLocation;
     }
 
+    public boolean ifContinue(String answer) {
+        validateAnswer(answer);
+        if (answer.equals("y")) {
+            gameContinueFlag = true;
+        }
+        if (answer.equals("n")) {
+            gameContinueFlag = false;
+        }
+        return gameContinueFlag;
+    }
+
+    private void validateAnswer(String answer) {
+        if (!answer.equals("Y") && !answer.equals("n")) {
+            throw new IllegalArgumentException("y와 n만 입력할 수 있습니다.");
+        }
+    }
+
     public boolean ifScoreOver21() {
+        gameMoney = 0;
         return getScore() > 21;
+    }
+
+    public boolean ifContinue() {
+        return gameContinueFlag;
     }
 
     public double getBettingMoney() {
@@ -68,10 +90,6 @@ public class Player {
 
     public double getLostTheBettingMoney() {
         return 0 - bettingMoney;
-    }
-
-    public boolean ifContinue() {
-        return gameContinueFlag;
     }
 
     public void gameDone() {
