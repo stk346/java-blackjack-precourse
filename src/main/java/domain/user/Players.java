@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Players {
 
-    List<Player> players;
+    private List<Player> players;
 
     public Players(String names, List<Integer> bettingMoneys) {
         String[] playerNames = getPlayerNames(names);
@@ -37,19 +37,23 @@ public class Players {
         }
     }
 
-    public void InitialCheck() {
-        for (Player player : players) {
-            if (player.getScore() == 21) {
-                player.gameDone();
-            }
-        }
-    }
-
     public double getTotalBettingMoney() {
         double sum = 0;
         for (Player player : players) {
             sum += player.getBettingMoney();
         }
         return sum;
+    }
+
+    public void playerCheck(boolean convertAce) {
+        for (Player player : players) {
+            if (player.getConvertedAceScore(convertAce) == 21) {
+                player.gameDone();
+            }
+        }
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 }

@@ -1,6 +1,7 @@
 package domain;
 
 import domain.user.Dealer;
+import domain.user.Player;
 import domain.user.Players;
 
 public class BlackJackGame {
@@ -15,5 +16,19 @@ public class BlackJackGame {
         this.totalBettingMoney = players.getTotalBettingMoney();
     }
 
+    public void ifDealerBlackJack(boolean convertAce) {
+        players.playerCheck(convertAce);
+        for (Player player : players.getPlayers()) {
+            getPlayerResultWhenDealerBlackJack(player);
+        }
+    }
 
+    private void getPlayerResultWhenDealerBlackJack(Player player) {
+        if (player.ifContinue()) {
+            player.lose();
+        }
+        if (!player.ifContinue()) {
+            player.tie();
+        }
+    }
 }

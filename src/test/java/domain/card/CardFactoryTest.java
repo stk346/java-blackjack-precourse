@@ -40,13 +40,13 @@ public class CardFactoryTest {
 
         @Test
         void 점수_계산_테스트() {
-            int playerScore = player.getScore();
+            int playerScore = player.getConvertedAceScore(false);
             assertThat(playerScore).isEqualTo(11);
         }
 
         @Test
         void 에이스가_11로_변경되는지_테스트() {
-            int playerScore = player.getConvertedAceScore();
+            int playerScore = player.getConvertedAceScore(true);
             assertThat(playerScore).isEqualTo(21);
         }
     }

@@ -30,7 +30,16 @@ public class Player {
         return cards;
     }
 
-    public int getScore() {
+    public int getConvertedAceScore(boolean convertAce) {
+        int score = getScore();
+        if (convertAce) {
+            cards.get(getAceLocation()).convertAce();
+            score = getScore();
+        }
+        return score;
+    }
+
+    private int getScore() {
         int score = 0;
         for (Card card : cards) {
             score += card.getScore();
@@ -38,16 +47,7 @@ public class Player {
         return score;
     }
 
-    public int getConvertedAceScore() {
-        int score = getScore();
-        if (getAceLocation() >= 0) {
-            cards.get(getAceLocation()).convertAce();
-            score = getScore();
-        }
-        return score;
-    }
-
-    private int getAceLocation() {
+    public int getAceLocation() {
         int aceLocation = -1;
         for (int idx = 0; idx < cards.size(); idx++) {
             if (cards.get(idx).ifAce()) {
@@ -76,7 +76,6 @@ public class Player {
     }
 
     public boolean ifScoreOver21() {
-        gameMoney = 0;
         return getScore() > 21;
     }
 
@@ -88,11 +87,29 @@ public class Player {
         return bettingMoney;
     }
 
-    public double getLostTheBettingMoney() {
-        return 0 - bettingMoney;
-    }
-
     public void gameDone() {
         gameContinueFlag = false;
+    }
+
+    public void getOneHalfBettingMoney() {
+        if (!gameContinueFlag) {
+            gameMoney += bettingMoney * 0.5;
+        }
+    }
+
+    public void getDoubleBettingMoney() {
+        gameMoney += bettingMoney * 1;
+    }
+
+    public double getGameMoney() {
+        return gameMoney;
+    }
+
+    public void lose() {
+        gameMoney = 0 - bettingMoney;
+    }
+
+    public void tie() {
+        gameMoney = 0;
     }
 }

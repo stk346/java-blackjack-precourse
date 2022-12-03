@@ -10,6 +10,8 @@ import java.util.List;
  * 게임 딜러를 의미하는 객체
  */
 public class Dealer {
+
+    private double gameMoney;
     private final List<Card> cards = new ArrayList<>();
 
     public Dealer() {}
@@ -23,19 +25,19 @@ public class Dealer {
         return cards;
     }
 
-    public int getScore() {
-        int score = 0;
-        for (Card card : cards) {
-            score += card.getScore();
+    public int getConvertedAceScore(boolean convertAce) {
+        int score = getScore();
+        if (convertAce) {
+            cards.get(getAceLocation()).convertAce();
+            score = getScore();
         }
         return score;
     }
 
-    public int getConvertedAceScore() {
-        int score = getScore();
-        if (getAceLocation() >= 0) {
-            cards.get(getAceLocation()).convertAce();
-            score = getScore();
+    private int getScore() {
+        int score = 0;
+        for (Card card : cards) {
+            score += card.getScore();
         }
         return score;
     }
