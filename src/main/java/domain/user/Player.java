@@ -43,4 +43,38 @@ public class Player {
         }
         return score;
     }
+
+    public int getConvertedAceScore() {
+        int score = getScore();
+        if (getAceLocation() >= 0) {
+            cards.get(getAceLocation()).convertAce();
+            score = getScore();
+        }
+        return score;
+    }
+
+    private int getAceLocation() {
+        int aceLocation = -1;
+        for (int idx = 0; idx < cards.size(); idx++) {
+            if (cards.get(idx).ifAce()) {
+                aceLocation =  idx;
+                return aceLocation;
+            }
+        }
+        return aceLocation;
+    }
+
+
+
+    public boolean ifScoreOver21() {
+        return getScore() > 21;
+    }
+
+    public double getLostMoney() {
+        return bettingMoney;
+    }
+
+    public double getLostTheBettingMoney() {
+        return 0 - bettingMoney;
+    }
 }

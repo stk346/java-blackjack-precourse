@@ -21,6 +21,12 @@ public class Card {
         return symbol.getScore();
     }
 
+    public boolean ifAce() { return symbol == Symbol.ACE; }
+
+    public void convertAce() {
+        symbol.convertScore();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

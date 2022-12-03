@@ -24,4 +24,8 @@ public enum Symbol {
     public int getScore() {
         return score;
     }
+
+    public void convertScore() {
+        this.score = 11;
+    }
 }

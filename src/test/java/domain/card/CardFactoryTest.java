@@ -43,5 +43,11 @@ public class CardFactoryTest {
             int playerScore = player.getScore();
             assertThat(playerScore).isEqualTo(11);
         }
+
+        @Test
+        void 에이스가_11로_변경되는지_테스트() {
+            int playerScore = player.getConvertedAceScore();
+            assertThat(playerScore).isEqualTo(21);
+        }
     }
 }
