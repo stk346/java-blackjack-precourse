@@ -36,5 +36,11 @@ public class Player {
         return cards;
     }
 
-
+    public int getScore() {
+        int score = 0;
+        for (Card card : cards) {
+            score += card.getScore();
+        }
+        return score;
+    }
 }

@@ -37,5 +37,11 @@ public class CardFactoryTest {
         void 카드_개수_테스트() {
             assertThat(player.getCards().size()).isEqualTo(2);
         }
+
+        @Test
+        void 점수_계산_테스트() {
+            int playerScore = player.getScore();
+            assertThat(playerScore).isEqualTo(11);
+        }
     }
 }
