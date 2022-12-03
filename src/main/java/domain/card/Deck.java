@@ -1,19 +1,18 @@
 package domain.card;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class Deck {
 
-    private final List<Card> deck;
+    public static List<Card> deck;
 
     public Deck() {
-        deck = CardFactory.create();
+        CardFactory.create();
         Collections.shuffle(deck);
     }
 
-    public List<Card> getDeck() {
-        return deck;
+    public static Card getCard() {
+        return deck.subList(0, 1).get(0);
     }
 }

@@ -19,14 +19,6 @@ public class Dealer {
     }
 
     // TODO 추가 기능 구현
-
-    public void generateDeck() {
-        Deck deck = new Deck();
-        for (Card card : deck.getDeck()) {
-            addCard(card);
-        }
-    }
-
     public List<Card> getCards() {
         return cards;
     }

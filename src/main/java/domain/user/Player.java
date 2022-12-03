@@ -1,7 +1,6 @@
 package domain.user;
 
 import domain.card.Card;
-import domain.card.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,8 @@ import java.util.List;
 public class Player {
     private final String name;
     private final double bettingMoney;
+
+    private boolean gameContinueFlag = true;
     private final List<Card> cards = new ArrayList<>();
 
     public Player(String name, double bettingMoney) {
@@ -24,13 +25,6 @@ public class Player {
     }
 
     // TODO 추가 기능 구현
-
-    public void generateDeck() {
-        Deck deck = new Deck();
-        for (Card card : deck.getDeck()) {
-            addCard(card);
-        }
-    }
 
     public List<Card> getCards() {
         return cards;
@@ -64,17 +58,23 @@ public class Player {
         return aceLocation;
     }
 
-
-
     public boolean ifScoreOver21() {
         return getScore() > 21;
     }
 
-    public double getLostMoney() {
+    public double getBettingMoney() {
         return bettingMoney;
     }
 
     public double getLostTheBettingMoney() {
         return 0 - bettingMoney;
+    }
+
+    public boolean ifContinue() {
+        return gameContinueFlag;
+    }
+
+    public void gameDone() {
+        gameContinueFlag = false;
     }
 }

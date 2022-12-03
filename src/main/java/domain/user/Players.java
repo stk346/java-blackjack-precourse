@@ -1,5 +1,7 @@
 package domain.user;
 
+import domain.card.Deck;
+
 import java.util.List;
 
 public class Players {
@@ -29,5 +31,25 @@ public class Players {
         return names.split(", ");
     }
 
+    public void getInitialCard() {
+        for (Player player : players) {
+            player.addCard(Deck.getCard());
+        }
+    }
 
+    public void InitialCheck() {
+        for (Player player : players) {
+            if (player.getScore() == 21) {
+                player.gameDone();
+            }
+        }
+    }
+
+    public double getTotalBettingMoney() {
+        double sum = 0;
+        for (Player player : players) {
+            sum += player.getBettingMoney();
+        }
+        return sum;
+    }
 }
